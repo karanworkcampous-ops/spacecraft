@@ -1,0 +1,234 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background-color: #050505;
+    background-image: radial-gradient(circle at center, #111 0%, #000 100%), 
+                      radial-gradient(circle at 15% 50%, rgba(255, 255, 255, 0.08) 0%, transparent 2%),
+                      radial-gradient(circle at 85% 30%, rgba(255, 255, 255, 0.05) 0%, transparent 2%);
+    background-size: 100% 100%, 100px 100px, 150px 150px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Orbitron', sans-serif;
+    color: white;
+}
+
+/* UI Panel Styling */
+.ui-panel {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    background: rgba(10, 15, 30, 0.85);
+    padding: 20px 25px;
+    border: 1px solid rgba(75, 144, 242, 0.3);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(75, 144, 242, 0.1);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+}
+
+.ui-panel h1 {
+    margin: 0 0 10px 0;
+    font-size: 1.4rem;
+    color: #4b90f2;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(75, 144, 242, 0.5);
+}
+
+.ui-panel p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    color: #b0c4de;
+}
+
+.ui-panel .controls-hint {
+    font-size: 0.75rem;
+    color: #666;
+    margin-top: 15px;
+}
+
+/* 3D Universe Setup */
+.universe {
+    perspective: 1200px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.solar-system {
+    position: relative;
+    width: 800px;
+    height: 800px;
+    transform-style: preserve-3d;
+    transform: rotateX(70deg) rotateY(0deg);
+    transition: transform 1s ease;
+}
+
+/* Add a slight rotation to the whole system for dynamic feel */
+@keyframes system-drift {
+    0% { transform: rotateX(70deg) rotateZ(0deg); }
+    100% { transform: rotateX(70deg) rotateZ(360deg); }
+}
+
+/* The Sun */
+.sun {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    margin-top: -50px;
+    margin-left: -50px;
+    background: radial-gradient(circle, #fff, #ffd700, #ff4500);
+    border-radius: 50%;
+    box-shadow: 0 0 60px #ff4500, 0 0 120px #ffd700, inset 0 0 20px #fff;
+    transform: rotateX(-90deg); /* Counteract the 3D tilt to face camera */
+    z-index: 10;
+}
+
+.sun .glow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: 0 0 150px 50px rgba(255, 165, 0, 0.3);
+    animation: pulse 4s infinite alternate;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(1.1); opacity: 1; }
+}
+
+/* Orbits */
+.orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    transform-style: preserve-3d;
+    animation: rotate linear infinite;
+    box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.02);
+}
+
+/* Planet Positioning */
+.planet-container {
+    position: absolute;
+    top: -50%; /* Position at top of orbit */
+    left: 50%;
+    transform-style: preserve-3d;
+}
+
+.planet {
+    position: absolute;
+    border-radius: 50%;
+    /* To keep planets looking like spheres, we use radial gradients and counter-rotate them */
+    transform-style: preserve-3d;
+    animation: counter-rotate linear infinite;
+}
+
+/* The dark side of the planet (Shadow) */
+.planet-shadow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: inset -5px -5px 15px rgba(0,0,0,0.8);
+}
+
+/* Orbit Sizes & Speeds */
+.mercury-orbit { width: 140px; height: 140px; margin: -70px; animation-duration: 4s; }
+.venus-orbit { width: 220px; height: 220px; margin: -110px; animation-duration: 10s; }
+.earth-orbit { width: 320px; height: 320px; margin: -160px; animation-duration: 16s; }
+.mars-orbit { width: 420px; height: 420px; margin: -210px; animation-duration: 30s; }
+.jupiter-orbit { width: 620px; height: 620px; margin: -310px; animation-duration: 189s; }
+.saturn-orbit { width: 820px; height: 820px; margin: -410px; animation-duration: 468s; }
+.uranus-orbit { width: 1020px; height: 1020px; margin: -510px; animation-duration: 1344s; }
+.neptune-orbit { width: 1200px; height: 1200px; margin: -600px; animation-duration: 2636s; }
+
+/* Planet Sizes, Colors & Specific Speeds for counter rotation */
+.mercury { width: 10px; height: 10px; margin: -5px 0 0 -5px; background: radial-gradient(circle at 30% 30%, #d4d4d4, #666); animation-duration: 4s; }
+.venus { width: 16px; height: 16px; margin: -8px 0 0 -8px; background: radial-gradient(circle at 30% 30%, #f5d061, #b87333); animation-duration: 10s; }
+.earth { width: 20px; height: 20px; margin: -10px 0 0 -10px; background: radial-gradient(circle at 30% 30%, #4b90f2, #00008b); animation-duration: 16s; }
+.mars { width: 14px; height: 14px; margin: -7px 0 0 -7px; background: radial-gradient(circle at 30% 30%, #f05e23, #8b0000); animation-duration: 30s; }
+.jupiter { width: 48px; height: 48px; margin: -24px 0 0 -24px; background: radial-gradient(circle at 30% 30%, #e0ae6f, #8b4513); background-image: repeating-linear-gradient(0deg, transparent, transparent 4px, rgba(139,69,19,0.3) 4px, rgba(139,69,19,0.3) 8px); animation-duration: 189s; }
+.saturn { width: 40px; height: 40px; margin: -20px 0 0 -20px; background: radial-gradient(circle at 30% 30%, #f4d083, #b8860b); animation-duration: 468s; }
+.uranus { width: 28px; height: 28px; margin: -14px 0 0 -14px; background: radial-gradient(circle at 30% 30%, #71b9cc, #008b8b); animation-duration: 1344s; }
+.neptune { width: 26px; height: 26px; margin: -13px 0 0 -13px; background: radial-gradient(circle at 30% 30%, #2f5d94, #000080); animation-duration: 2636s; }
+
+/* Earth Moon */
+.moon-orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 34px;
+    height: 34px;
+    margin: -17px 0 0 -17px;
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    animation: rotate 1.5s linear infinite;
+    transform-style: preserve-3d;
+}
+
+.moon {
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    margin-left: -3px;
+    background: radial-gradient(circle at 30% 30%, #fff, #888);
+    border-radius: 50%;
+    box-shadow: inset -1px -1px 3px rgba(0,0,0,0.8);
+}
+
+/* Saturn Rings */
+.saturn-rings {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80px;
+    height: 80px;
+    margin: -40px 0 0 -40px;
+    border-radius: 50%;
+    border: 8px solid rgba(244, 208, 131, 0.5);
+    border-top-color: rgba(244, 208, 131, 0.8);
+    border-bottom-color: rgba(244, 208, 131, 0.2);
+    transform: rotateX(75deg);
+    box-shadow: 0 0 10px rgba(244, 208, 131, 0.3);
+}
+
+/* Animations */
+@keyframes rotate {
+    0% { transform: rotateZ(0deg); }
+    100% { transform: rotateZ(360deg); }
+}
+
+@keyframes counter-rotate {
+    /* To keep the planet facing the screen, we reverse the rotateZ of the orbit, and counter the rotateX of the solar system */
+    0% { transform: rotateZ(0deg) rotateX(-70deg); }
+    100% { transform: rotateZ(-360deg) rotateX(-70deg); }
+}
+
+/* Interactions */
+.universe:hover .orbit,
+.universe:hover .planet,
+.universe:hover .moon-orbit {
+    animation-play-state: paused;
+}
+
+/* Adding a bit of responsive sizing */
+@media (max-width: 1200px) {
+    .solar-system { transform: scale(0.8) rotateX(70deg); }
+}
+@media (max-width: 800px) {
+    .solar-system { transform: scale(0.5) rotateX(70deg); }
+}
+@media (max-width: 500px) {
+    .solar-system { transform: scale(0.3) rotateX(70deg); }
+}
