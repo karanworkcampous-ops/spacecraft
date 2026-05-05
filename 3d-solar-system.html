@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive 3D Solar System</title>
+    <link rel="stylesheet" href="3d-solar-system.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <!-- UI Overlay -->
+    <div class="ui-panel">
+        <h1>3D Solar System Explorer</h1>
+        <p>Hover over the solar system to pause time.</p>
+        <p class="controls-hint">Pure HTML & CSS Implementation</p>
+    </div>
+
+    <!-- Universe Container -->
+    <div class="universe">
+        <div class="solar-system">
+            
+            <!-- Sun -->
+            <div class="sun">
+                <div class="glow"></div>
+            </div>
+            
+            <!-- Mercury -->
+            <div class="orbit mercury-orbit">
+                <div class="planet-container">
+                    <div class="planet mercury">
+                        <div class="planet-shadow"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Venus -->
+            <div class="orbit venus-orbit">
+                <div class="planet-container">
+                    <div class="planet venus">
+                        <div class="planet-shadow"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Earth & Moon -->
+            <div class="orbit earth-orbit">
+                <div class="planet-container">
+                    <div class="planet earth">
+                        <div class="planet-shadow"></div>
+                    </div>
+                    <div class="moon-orbit">
+                        <div class="moon"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mars -->
+            <div class="orbit mars-orbit">
+                <div class="planet-container">
+                    <div class="planet mars">
+                        <div class="planet-shadow"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Jupiter -->
+            <div class="orbit jupiter-orbit">
+                <div class="planet-container">
+                    <div class="planet jupiter">
+                        <div class="planet-shadow"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Saturn -->
+            <div class="orbit saturn-orbit">
+                <div class="planet-container">
+                    <div class="planet saturn">
+                        <div class="saturn-rings"></div>
+                        <div class="planet-shadow"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Uranus -->
+            <div class="orbit uranus-orbit">
+                <div class="planet-container">
+                    <div class="planet uranus">
+                        <div class="planet-shadow"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Neptune -->
+            <div class="orbit neptune-orbit">
+                <div class="planet-container">
+                    <div class="planet neptune">
+                        <div class="planet-shadow"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
